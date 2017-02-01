@@ -25,7 +25,8 @@ exports.up = function(knex, Promise) {
         .inTable('exercises');
       table.integer('sets');
       table.string('reps'); // if array, stringify before insertion
-      table.string('weight'); // if array, stringify before insertion
+      table.string('target_weight'); // if array, stringify before insertion
+      table.integer('actual_weight');
       table.timestamps();
 
     })

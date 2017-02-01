@@ -14,7 +14,7 @@ module.exports = function (app, express) {
 
 
   app.post('/workoutHistory', userController.storeWorkout);
-  app.get('/workoutHistory', userController.getWorkoutHistory);
+  app.get('/workoutHistory/:user', userController.getWorkoutHistory);
 
 
   app.use(function(req, res) {
@@ -22,4 +22,3 @@ module.exports = function (app, express) {
   });
 
 };
-
