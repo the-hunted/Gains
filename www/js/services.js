@@ -1,50 +1,99 @@
-angular.module('starter.services', [])
+angular.module('masa.services', [])
+.factory('WorkoutsFac', function ($http, $window) { // throw into workout planner controller
 
-.factory('Chats', function() {
-  // Might use a resource here that returns a JSON array
+  var storeWorkout = function(exercisesData) {
+    return $http({
+      method: 'POST',
+      url: '/workoutHistory',
+      data: exercisesData
+    })
+    .then(function(res) {
+      console.log('Successfully posted the data server side where it can be stored in the user\'s db:', res.data);
+    }, function(err) {
+      console.error(err);
+    })
+  };
 
-  // Some fake testing data
-  var chats = [{
-    id: 0,
-    name: 'Ben Sparrow',
-    lastText: 'You on your way?',
-    face: 'img/ben.png'
-  }, {
-    id: 1,
-    name: 'Max Lynx',
-    lastText: 'Hey, it\'s me',
-    face: 'img/max.png'
-  }, {
-    id: 2,
-    name: 'Adam Bradleyson',
-    lastText: 'I should buy a boat',
-    face: 'img/adam.jpg'
-  }, {
-    id: 3,
-    name: 'Perry Governor',
-    lastText: 'Look at my mukluks!',
-    face: 'img/perry.png'
-  }, {
-    id: 4,
-    name: 'Mike Harrington',
-    lastText: 'This is wicked good ice cream.',
-    face: 'img/mike.png'
-  }];
+  var getWorkoutHistory = function() {
+    return $http({
+      method: 'GET', // changed from GET becaus
+      url: '/workoutHistory/' + $window.localStorage.getItem('user')
+    })
+    .then(function(res) {
+      console.log('Successfully retrieved user\'s workout history from the db:', res.data);
+      return res.data;
+    }, function(err) {
+      console.error(err);
+      return err;
+    })
+  };
+
+  var decode = function() {
+    console.log('decoding user token');
+    var token = $window.localStorage.getItem('masaToken');
+    console.log('token:', token);
+    var user;
+
+    if (!token) {
+      console.log('the user has no TOKEN!');
+    }
+
+    else {
+      user = jwt.decode(token, 'secret');
+      return user;
+    }
+
+  };
 
   return {
-    all: function() {
-      return chats;
-    },
-    remove: function(chat) {
-      chats.splice(chats.indexOf(chat), 1);
-    },
-    get: function(chatId) {
-      for (var i = 0; i < chats.length; i++) {
-        if (chats[i].id === parseInt(chatId)) {
-          return chats[i];
-        }
-      }
-      return null;
-    }
+    decode: decode,
+    storeWorkout: storeWorkout,
+    getWorkoutHistory: getWorkoutHistory
   };
-});
+})
+
+.factory('AuthFact', function($http, $location, $window) {
+
+  var signUp = function(signUpData) {
+
+    return $http.post('/signup', signUpData)
+      .then(function(res) {
+        return res.data.token;
+      }, function(err) {
+        console.log('Signup Error: ', err)
+      });
+  };
+
+  var login = function(loginData) {
+
+    return $http.post('/signin', loginData)
+    .then(function(res) {
+      return res.data.token;
+
+    }, function(err) {
+      console.log('Login Error: ', err);
+    });
+  };
+
+
+  //Not really working yet.
+  var isAuth = function () {
+    return !!$window.localStorage.getItem('masaToken');
+  };
+
+  var signout = function (){
+    $window.localStorage.removeItem('user');
+    $window.localStorage.removeItem('masaToken');
+    $location.path('/signin');
+  };
+
+
+    return {
+      signUp: signUp,
+      login: login,
+      isAuth: isAuth,
+      signout: signout
+    }
+
+  });
+  
