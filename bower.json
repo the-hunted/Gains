@@ -17,5 +17,9 @@
   ],
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.3.2"
+  },
+  "dependencies": {
+    "ionic-material": "^0.4.2",
+    "Waves": "waves#^0.7.5"
   }
 }
