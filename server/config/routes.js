@@ -17,8 +17,8 @@ module.exports = function (app, express) {
   app.get('/workoutHistory/:user', userController.getWorkoutHistory);
 
 
-  app.use(function(req, res) {
-    res.sendfile(path.resolve(__dirname + '/../../client/index.html'));
-  });
+  // app.use(function(req, res) {
+  //   res.sendfile(path.resolve(__dirname + '/../../client/index.html'));
+  // });
 
 };

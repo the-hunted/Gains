@@ -1,0 +1,27 @@
+{
+  "name": "make-america-swole-again",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/the-hunted/make-america-swole-again.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://github.com/the-hunted/make-america-swole-again#readme",
+  "dependencies": {
+    "body-parser": "^1.16.0",
+    "express": "^4.14.0",
+    "jwt-simple": "^0.5.1",
+    "knex": "^0.12.6",
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "pg": "^6.1.2",
+    "router": "^1.1.4"
+  }
+}
