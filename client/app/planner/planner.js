@@ -25,7 +25,19 @@ app.controller('PlannerCtrl', ['$scope', 'WorkoutsFac', '$window', function($sco
   $scope.seeWorkoutHistory = function() {
     console.log('trying to see if we can get user exercise and workout data back from db');
     var user = $window.localStorage.getItem('user');
-    var history = WorkoutsFac.getWorkoutHistory(user);
-    console.log('this is the history:', history);
+    WorkoutsFac.getWorkoutHistory(user)
+      .then(function(history) {
+        history.forEach(function(ex) {
+          $scope.exercises.push({
+            name: ex.name,
+            sets: ex.sets,
+            reps: ex.reps,
+            targetWeight: ex.targetWeight,
+            actualWeight: ex.actualWeight
+          });
+          console.log('SCOPE EXERCISES', $scope.exercises);
+        });
+      });
   }
+
 }]);

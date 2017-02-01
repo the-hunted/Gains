@@ -21,20 +21,23 @@ module.exports = {
               // lookup the eid by e-name
               // have a ref to user by uid
               console.log(exercise.name); // correctly logs exercise's name
-              var eid = 7;
               knex('exercises')
                 .select('eid')
                 .where('name', exercise.name) // if the name doesn't match db then eid will not be set properly
-                .then(function(exerciseId) {
-                  eid = exerciseId || 7;
-                });
-              console.log(eid);
-
-              // uid is hard-coded to 1 because without signup and signin, there is no user account to tie the exercise and workout data to
-              knex('history')
-                .insert({uid: uid[0].uid, eid: eid, sets: exercise.sets, reps: exercise.reps, weight: exercise.actualWeight})
-                .then(function() {
-                  res.status(200).end('workout exercise data was successfuly stored in workout history!');
+                .then(function(eid) {
+                  knex('history')
+                    .insert({
+                      uid: uid[0].uid,
+                      eid: eid[0].eid,
+                      sets: exercise.sets,
+                      reps: exercise.reps,
+                      target_weight: exercise.targetWeight,
+                      created_at: new Date(),
+                      updated_at: new Date()
+                    })
+                    .then(function() {
+                      res.status(200).end('workout exercise data was successfuly stored in workout history!');
+                    });
                 });
             });
           }
@@ -45,28 +48,40 @@ module.exports = {
   },
 
   getWorkoutHistory: function(req, res) {
-    // uid is hard-coded
-    console.log('trying to get workout history from the server side');
-    // console.log('req.params:', req.params);
 
-
-
-    knex('history')
-      .select('eid', 'sets', 'reps', 'weight')
-      .where('uid', 1) // 1 is hard-coded
-      .then(function(exercises) { // should return an array of exercise objects - {eid: , sets: , reps: , weight: }
-        exercises.forEach((exercise) => { // replacing eid with e_name. this method seems very inefficient...find a better way later
-          knex('exercises')
-          .select('name')
-          .where('eid', exercise.eid) // if the name doesn't match db then eid will not be set properly
-          .then(function(exerciseName) { // query returns exerciseName
-            console.log('name of exercise with id', exercise.eid + ':', exerciseName);
-            exercise.eid = exerciseName; // right now, all exercise names will correspond to the eid of 7, i.e. cable curl
-          });
+    knex('exercises')
+      .select('eid', 'name')
+      .then(function(exerciseNames) {
+        var exerciseNamesObj = {};
+        exerciseNames.forEach(function(exerciseName) {
+          exerciseNamesObj[exerciseName.eid] = exerciseName.name;
         });
-        console.log('array of objects with exercise data being returned to client:', exercises);
-        res.json(exercises); // could do res.json() here
+        knex('users')
+          .select('uid')
+          .where('username', req.params.user)
+          .then(function(uid) {
+            knex('history')
+              .select('eid', 'sets', 'reps', 'target_weight', 'actual_weight')
+              .where('uid', uid[0].uid)
+              .then(function(exercises) { // should return an array of exercise objects - {eid: , sets: , reps: , weight: }
+                var result = [];
+                exercises.forEach(function(exercise) {
+                  result.push({
+                    name: exerciseNamesObj[exercise.eid],
+                    sets: exercise.sets,
+                    reps: exercise.reps,
+                    targetWeight: exercise.target_weight,
+                    actualWeight: exercise.actual_weight
+                  });
+                });
+
+                console.log('array of objects with exercise data being returned to client:', result);
+
+                res.json(result);
+              });
+          })
       });
+
   },
 
   signup: function (req, res, next) {
@@ -87,7 +102,12 @@ module.exports = {
         } else {
           // make a new user if not one
           knex('users')
-            .insert({username: username, password: password})
+            .insert({
+              username: username,
+              password: password,
+              created_at: new Date(),
+              updated_at: new Date()
+            })
             .then(function(user) {
               console.log('created user:', user);
             })
@@ -98,7 +118,8 @@ module.exports = {
       console.log('signup user:', user);
         console.log('giving user jwt token');
         // create token to send back for auth
-        var token = jwt.encode(user[0].username, 'secret');
+        // var token = jwt.encode(user[0].username, 'secret');
+        var token = jwt.encode(username, 'secret');
         res.json({token: token});
       })
       .catch(function (error) {

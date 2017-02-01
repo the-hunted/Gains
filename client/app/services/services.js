@@ -18,12 +18,14 @@ angular.module('masa.services', [])
   var getWorkoutHistory = function() {
     return $http({
       method: 'GET', // changed from GET becaus
-      url: '/workoutHistory' // /${user}`
+      url: '/workoutHistory/' + $window.localStorage.getItem('user')
     })
     .then(function(res) {
       console.log('Successfully retrieved user\'s workout history from the db:', res.data);
+      return res.data;
     }, function(err) {
       console.error(err);
+      return err;
     })
   };
 

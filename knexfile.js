@@ -5,10 +5,12 @@ module.exports = {
   development: {
     client: 'postgresql',
     connection: {
-      database: 'masa-db'
+      user: 'postgres',
+      host: 'localhost',
+      database: 'masa_db'
     },
     seeds: {
       directory: './seeds/'
-    } 
+    }
   }
 };
