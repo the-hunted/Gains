@@ -1,5 +1,20 @@
-angular.module('masa.services', [])
-.factory('WorkoutsFac', function ($http, $window) { // throw into workout planner controller
+app.factory('StorageFac', function ($http, $window, $localStorage) { // throw into workout planner controller
+
+  var _add = function(exerciseData) {
+    var date = new Date().setHours(0, 0, 0, 0);
+    if(!$localStorage.workouts){
+      $localStorage.workouts = {};
+    }
+    $localStorage.workouts[date] = exerciseData;
+    console.log('$localStorage', $localStorage);
+  };
+
+  return {
+    _add: _add
+  };
+})
+
+.factory('WorkoutFac', function ($http, $window, $localStorage) { // throw into workout planner controller
 
   var storeWorkout = function(exercisesData) {
     return $http({
@@ -28,31 +43,13 @@ angular.module('masa.services', [])
     })
   };
 
-  var decode = function() {
-    console.log('decoding user token');
-    var token = $window.localStorage.getItem('masaToken');
-    console.log('token:', token);
-    var user;
-
-    if (!token) {
-      console.log('the user has no TOKEN!');
-    }
-
-    else {
-      user = jwt.decode(token, 'secret');
-      return user;
-    }
-
-  };
-
   return {
-    decode: decode,
     storeWorkout: storeWorkout,
     getWorkoutHistory: getWorkoutHistory
   };
 })
 
-.factory('AuthFact', function($http, $location, $window) {
+.factory('AuthFac', function($http, $location, $window) {
 
   var signUp = function(signUpData) {
 
