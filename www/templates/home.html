@@ -22,7 +22,7 @@
         </ion-item>
     </ion-list>
 
-    <button id="addGoals" class="button button-block button-positive" ng-click="modal.show()">
+    <button id="addGoals" class="button button-block button-positive" ng-click="openModal()">
       Add Goals
     </button>
 
@@ -31,7 +31,7 @@
       <ion-modal-view>
         <ion-header-bar class="bar bar-header bar-positive">
           <h1 class="title">New Goal</h1>
-          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+          <button class="button button-clear button-primary" ng-click="closeModal()">Cancel</button>
         </ion-header-bar>
         <ion-content class="padding">
           <div class="list">

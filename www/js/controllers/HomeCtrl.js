@@ -34,7 +34,11 @@ app.controller('HomeCtrl', ['$scope', '$http','$ionicModal', '$ionicPopup', func
 
   //Show Modal
   $scope.openModal = function() {
-    $scope.modal.show();
+    if($scope.goals.length < 3)
+      $scope.modal.show();
+    else {
+      $scope.showAlertTooMany();
+    }
   };
 
   //Close Modal
