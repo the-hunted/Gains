@@ -1,9 +1,40 @@
 <ion-view view-title="Home">
   <ion-content>
-    <div class="row">
-      <div class="col">Something</div>
-      <div class="col">Something</div>
-      <div class="col">Something</div>
+    <!-- <div class='quote' ng-init='getQuote()' > -->
+    <div class='quote'>
+      <h1>Welcome</h1>
+      <br></br>
+      <!-- <h2>{{quote.quote}}</h2>
+      <h4>-{{quote.author}}</h4> -->
     </div>
+
+    <h4>My Goals For Today:</h4>
+    <ul class="list" ng-repeat="listItem in goals">
+      <li>{{listItem.goal}}</li>
+    </ul>
+
+    <button id="addGoals" class="button button-block button-positive" ng-click="modal.show()">
+      Add Goals
+    </button>
+
+    <!-- Goal Modal -->
+    <script id="templates/modal.html" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar class="bar bar-header bar-positive">
+          <h1 class="title">New Goal</h1>
+          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+        </ion-header-bar>
+        <ion-content class="padding">
+          <div class="list">
+            <label class="item item-input">
+              <span class="input-label">Goal:</span>
+              <input ng-model="userInput" type="text">
+            </label>
+            <button class="button button-full button-positive" ng-click="createGoal(userInput)">Create</button>
+          </div>
+        </ion-content>
+      </ion-modal-view>
+    </script>
+
   </ion-content>
 </ion-view>
