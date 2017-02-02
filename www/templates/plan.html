@@ -1,0 +1,25 @@
+<ion-view view-title="Plan Your Workout">
+  <ion-content class="im-wrapper">
+    <div class="exerciseForm" ng-repeat="ex in exercises track by $index">
+      <h3>Exercise:</h3>
+      <label class="item item-input item-stacked-label">Exercise
+        <select ng-model="ex.name">
+          <option ng-repeat="lift in liftList" value="{{lift.name}}">{{lift.name}}</option>
+        </select>
+      </label>
+      <fieldset  style="margin-bottom: 20px">
+        <h3>Target Reps for each Set</h3>
+        <label ng-repeat="i in [1, 2, 3, 4, 5, 6]">Set {{i}}
+        <input type="tel" style="margin-right: 40px; display: inline" class="button button-fab repsButtons" ng-model="ex.sets[i].target_reps" value="ex.sets[i].target_reps"></input></label>          
+      </fieldset>
+        
+      <fieldset  style="margin-bottom: 80px">
+        <h3>Actual Reps for each Set</h3>
+        <label ng-repeat="j in [1, 2, 3, 4, 5, 6]">Set {{j}}
+        <input type="tel" style="margin-right: 40px; display: inline"  class="button button-fab repsButtons" ng-model="ex.sets[j].actual_reps" value="ex.sets[j].actual_reps"></input></label>          
+      </fieldset>
+    </div>
+    <button class="addfields button button-block" ng-click="addNewLift()">Add Exercise</button>
+    <button class="addfields button button-block" ng-click="logWorkout()">Save Exercise</button>
+  </ion-content>
+</ion-view>
