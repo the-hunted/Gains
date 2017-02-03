@@ -1,37 +1,50 @@
 <ion-view view-title="History">
   <ion-content>
-    <div ng-repeat="(i, item) in history">
-      <h2>{{dates[i] | date}}</h2>
-      <div ng-repeat="workout in item[dates[i]]">
-        <div class="row">
-          <div class="col">
-            <h4>{{workout.name}}</h3>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">Target Weight</div>
-          <div class="col">Actual Weight</div>
-        </div>
-        <div class="row">
-          <div class="col">{{workout.target_weight}}lb</div>
-          <div class="col">{{workout.actual_weight}}lb</div>
-        </div>
-        <div ng-repeat="(num, setData) in workout.sets">
+    <!-- <ion-list> -->
+      <div ng-repeat="(i, item) in history">
+        <!-- <ion-item class="item-stable"
+                  ng-click="toggleGroup(group)"
+                  ng-class="{active: isGroupShown(group)}">
+          <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
+          &nbsp;
+          Group {{group.name}}
+        </ion-item> -->
+        <h2>{{dates[i] | date}}</h2>
+        <div ng-repeat="workout in item[dates[i]]">
           <div class="row">
             <div class="col">
-              <h5>Set {{num}}</h5>
+              <h4>{{workout.name}}</h3>
             </div>
           </div>
           <div class="row">
-            <div class="col">Target Reps</div>
-            <div class="col">Actual Reps</div>
+            <div class="col">Target Weight</div>
+            <div class="col">Actual Weight</div>
           </div>
           <div class="row">
-            <div class="col">{{setData.target_reps}}</div>
-            <div class="col">{{setData.actual_reps}}</div>
+            <div class="col">{{workout.targetWeight}}lb</div>
+            <div class="col">{{workout.actualWeight}}lb</div>
+          </div>
+          <div ng-repeat="(num, setData) in workout.sets">
+            <div class="row">
+              <div class="col">
+                <h5>Set {{num}}</h5>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">Target Reps</div>
+              <div class="col">Actual Reps</div>
+            </div>
+            <div class="row">
+              <div class="col">{{setData.targetReps}}</div>
+              <div class="col">{{setData.actualReps}}</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    <!-- </ion-list> -->
+
+
+    <input type="date">
+    <button>Show</button>
   </ion-content>
 </ion-view>
