@@ -9,7 +9,7 @@ app.controller('HomeCtrl', ['$scope', '$http','$ionicModal', '$ionicPopup', func
 
   //Add user input to goal list
   $scope.createGoal = function(input) {
-    if (input === null){
+    if (input === null || input.replace(/\s/g, '').length === 0){
       $scope.showAlertInputNull();
     } else if ($scope.goals.length < 3) {
       $scope.goals.push({ goal: input });
