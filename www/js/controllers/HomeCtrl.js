@@ -9,7 +9,6 @@ app.controller('HomeCtrl', ['$scope', '$http','$ionicModal', '$ionicPopup', func
 
   //Add user input to goal list
   $scope.createGoal = function(input) {
-    console.log(input);
     if (input === undefined) {
       $scope.showAlertInputNull();
     } else if (input === null) {
