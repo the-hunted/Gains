@@ -8,6 +8,10 @@ angular.module('masa.services', ['ngStorage'])
     return $localStorage.workouts;
   };
 
+  var getByDate = function(date) {
+    return $localStorage.workouts[date];
+  };
+
   var remove = function(date) {
     delete $localStorage.workouts[date];
   };
