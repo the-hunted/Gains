@@ -1,5 +1,6 @@
 <ion-view view-title="Plan Your Workout">
   <ion-content class="im-wrapper">
+    <h3 ng-model="day">{{day | date: 'mediumDate'}}</h3>
     <div class="exerciseForm" ng-repeat="ex in exercises track by $index">
       <label class="item item-input item-stacked-label">Exercise
         <select ng-model="ex.name">

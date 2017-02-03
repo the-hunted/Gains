@@ -16,8 +16,9 @@ angular.module('masa.services', ['ngStorage'])
     delete $localStorage.workouts[date];
   };
 
-  var add = function(date, exerciseData) {
+  var add = function(exerciseData, date) {
     $localStorage.workouts[date] = exerciseData;
+    console.log('$localStorage', $localStorage);
   };
 
   var getByDate = function(date) {
