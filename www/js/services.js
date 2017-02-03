@@ -21,12 +21,9 @@ angular.module('masa.services', ['ngStorage'])
   };
 
   var _getByDate = function(date) {
-    var x = date.valueOf();
-    
-    x = x.toString();
-    console.log('date in getbydate', x, typeof x);
-    console.log('localStorage in getbydate', $localStorage.workouts[x]);
-    return $localStorage.workouts[x];
+    date = date.valueOf().toString();
+    var workoutObj = $localStorage.workouts[date];
+    return workoutObj;
   }
 
   return {

@@ -1,6 +1,23 @@
 app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFac', function ($scope, $stateParams, ExerciseList, StorageFac) {
   
+  $scope.day;
   $scope.exercises = [];
+
+  function showWorkout() {
+    var dayOf = StorageFac.workoutDate;
+    if(dayOf){
+      var workout = StorageFac._getByDate(dayOf);
+      if(workout) {
+        $scope.exercises = workout;
+        console.log('showWorkout scope exercises', $scope.exercises);
+      } else {
+        $scope.day = dayOf;
+        console.log('nothing loaded from service, day set', $scope.day);
+      }
+    }
+  }
+
+  showWorkout();
 
   $scope.exercise =  {
     name: "",
@@ -46,6 +63,6 @@ app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFa
   }
 
   $scope.logWorkout = function() { // takes the exercises collection and saves to local storage
-    StorageFac._add($scope.exercises);
+    StorageFac._add($scope.exercises, $scope.day);
   };
 }]);
