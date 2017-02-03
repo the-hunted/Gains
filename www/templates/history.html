@@ -1,1 +1,14 @@
-
+<ion-view view-title="History">
+  <ion-content>
+    <div ng-repeat="(i, item) in history">
+      <h1>{{dates[i] | date}}</h1>
+      <div class="row" ng-repeat="(name, exerciseData) in item[dates[i]]">
+        <div class="col">{{name | uppercase}}</div>
+        <div class="col">{{name !== 'sets' ? exerciseData : ''}}</div>
+        <div class="col" ng-if="name === 'sets'" ng-repeat="(num, data) in exerciseData">
+          <span>{{num}}. </span><span ng-repeat="(repName, value) in data">{{repName | uppercase}}: {{value}} </span>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
