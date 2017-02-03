@@ -1,1 +1,10 @@
 /* Empty. Add your own CSS if you like */
+.calendar {
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+
+/*#calendarInstruct {
+  text-align: center;
+}*/

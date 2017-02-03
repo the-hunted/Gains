@@ -49,6 +49,16 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     }
   })
 
+  .state('app.calendar', {
+    url: '/calendar',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/calendar.html',
+        controller: 'CalendarCtrl'
+      }
+    }
+  })
+
   .state('app.history', {
     url: '/history',
     views: {

@@ -20,7 +20,7 @@ angular.module('masa.services', ['ngStorage'])
     $localStorage.workouts[date] = exerciseData;
   };
 
-  var _getByDate = function(date) {
+  var getByDate = function(date) {
     date = date.valueOf().toString();
     var workoutObj = $localStorage.workouts[date];
     return workoutObj;
