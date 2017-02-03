@@ -23,32 +23,32 @@ app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFa
 
   $scope.exercise =  {
     name: "",
-    target_weight: 0,
-    actual_weight: 0,
+    target_weight: null,
+    actual_weight: null,
     sets: {
       1: {
-        target_reps: 0,
-        actual_reps: 0
+        target_reps: null,
+        actual_reps: null
       },
       2: {
-        target_reps: 0,
-        actual_reps: 0
+        target_reps: null,
+        actual_reps: null
       },
       3: {
-        target_reps: 0,
-        actual_reps: 0
+        target_reps: null,
+        actual_reps: null
       },
       4: {
-        target_reps: 0,
-        actual_reps: 0
+        target_reps: null,
+        actual_reps: null
       },
       5: {
-        target_reps: 0,
-        actual_reps: 0
+        target_reps: null,
+        actual_reps: null
       },
       6: {
-        target_reps: 0,
-        actual_reps: 0
+        target_reps: null,
+        actual_reps: null
       }
     }
   };
