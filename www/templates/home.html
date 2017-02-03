@@ -1,19 +1,28 @@
 <ion-view view-title="Home">
   <ion-content>
-    <!-- <div class='quote' ng-init='getQuote()' > -->
+    <div class='quote' ng-init='getQuote()' >
     <div class='quote'>
-      <h1>Welcome</h1>
+      <h1>Welcome to MASA</h1>
+      <h6>Making America Swole Again</h6>
       <br></br>
-      <!-- <h2>{{quote.quote}}</h2>
-      <h4>-{{quote.author}}</h4> -->
+      <h2>{{quote.quote}}</h2>
+      <h4>-{{quote.author}}</h4>
     </div>
 
-    <h4>My Goals For Today:</h4>
-    <ul class="list" ng-repeat="listItem in goals">
-      <li>{{listItem.goal}}</li>
-    </ul>
+    <br></br>
 
-    <button id="addGoals" class="button button-block button-positive" ng-click="modal.show()">
+    <h4>My Goals For Today:</h4>
+
+    <ion-list show-delete="data.showDelete">
+        <ion-item ng-repeat="item in goals" item="item" class="item-remove-animate">
+          {{ item.goal }}
+          <ion-option-button class="button-assertive" ng-click="onItemDelete(item)">
+            Delete
+          </ion-option-button>
+        </ion-item>
+    </ion-list>
+
+    <button id="addGoals" class="button button-block button-positive" ng-click="openModal()">
       Add Goals
     </button>
 
@@ -22,7 +31,7 @@
       <ion-modal-view>
         <ion-header-bar class="bar bar-header bar-positive">
           <h1 class="title">New Goal</h1>
-          <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+          <button class="button button-clear button-primary" ng-click="closeModal()">Cancel</button>
         </ion-header-bar>
         <ion-content class="padding">
           <div class="list">
@@ -30,7 +39,7 @@
               <span class="input-label">Goal:</span>
               <input ng-model="userInput" type="text">
             </label>
-            <button class="button button-full button-positive" ng-click="createGoal(userInput)">Create</button>
+            <button class="button button-full button-positive" ng-click="createGoal(userInput); userInput = null">Create</button>
           </div>
         </ion-content>
       </ion-modal-view>
