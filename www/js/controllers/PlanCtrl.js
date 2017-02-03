@@ -10,12 +10,13 @@ app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFa
     } else {
       $scope.day = new Date().setHours(0, 0, 0, 0);
     }
-    var workout = StorageFac._getByDate($scope.day);
+    var workout = StorageFac.getByDate($scope.day);
     if(workout) {
       $scope.exercises = workout;
     }
   }
 
+  //when the view loads, display the workout for the selected date
   $scope.$watch('$viewContentLoaded', function(){
     showWorkout();
   });
@@ -60,14 +61,15 @@ app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFa
     var exerciseRecorded = JSON.stringify($scope.exercise);
     exerciseRecorded = JSON.parse(exerciseRecorded); //create clone of the $scope.exercise object
     $scope.exercises.push(exerciseRecorded); //push that clone to the $scope.exercises object
-    console.log('exercises', $scope.exercises);
   }
 
-  $scope.logWorkout = function() { // takes the exercises collection and saves to local storage
+  //takes the exercises collection and saves to local storage
+  $scope.logWorkout = function() {
     console.log('scope day for saved workout', $scope.day);
-    StorageFac._add($scope.exercises, $scope.day);
+    StorageFac.add($scope.exercises, $scope.day);
   };
 
+  //sets the workoutDate back to null when user leaves plan view
   $scope.$on("$destroy", function(){
     StorageFac.workoutDate = null;
     console.log('storage fac destroyed', StorageFac.workoutDate);

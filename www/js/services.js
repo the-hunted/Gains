@@ -19,19 +19,14 @@ angular.module('masa.services', ['ngStorage'])
   var add = function(exerciseData, date) {
     $localStorage.workouts[date] = exerciseData;
     console.log('$localStorage', $localStorage);
-  }; //should update workout for that day
-
-  var getByDate = function(date) {
-    date = date.valueOf().toString();
-    var workoutObj = $localStorage.workouts[date];
-    return workoutObj;
-  }
+  };
 
   return {
     getAll: getAll,
     remove: remove,
     add: add,
-    getByDate: getByDate
+    getByDate: getByDate,
+    workoutDate: null
   };
 })
 
