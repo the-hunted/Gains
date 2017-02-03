@@ -9,13 +9,15 @@ app.controller('HomeCtrl', ['$scope', '$http','$ionicModal', '$ionicPopup', func
 
   //Add user input to goal list
   $scope.createGoal = function(input) {
-    if (input === null || input.replace(/\s/g, '').length === 0){
+    if (input === undefined) {
       $scope.showAlertInputNull();
-    } else if ($scope.goals.length < 3) {
+    } else if (input === null) {
+      $scope.showAlertInputNull();
+    } else if (input.replace(/\s/g, '').length === 0) {
+      $scope.showAlertInputNull();
+    } else {
       $scope.goals.push({ goal: input });
       $scope.modal.hide();
-    } else {
-      $scope.showAlertTooMany();
     }
   };
 
@@ -52,7 +54,7 @@ app.controller('HomeCtrl', ['$scope', '$http','$ionicModal', '$ionicPopup', func
   $scope.showAlertTooMany = function() {
    var alertPopup = $ionicPopup.alert({
      title: 'Too many goals!',
-     template: 'Let\'s focus on your current goals first! Complete them before adding new goals.'
+     template: 'Let\'s focus on your current goals first! Complete them before adding new goals or delete them but sliding to the left.'
    });
   };
 
