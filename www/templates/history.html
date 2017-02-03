@@ -1,7 +1,5 @@
 <ion-view view-title="History">
   <ion-content>
-    <input type="date">
-
     <div ng-repeat="(i, item) in history">
       <h2>{{dates[i] | date}}</h2>
       <div ng-repeat="workout in item[dates[i]]">
@@ -15,8 +13,8 @@
           <div class="col">Actual Weight</div>
         </div>
         <div class="row">
-          <div class="col">{{workout.targetWeight}}lb</div>
-          <div class="col">{{workout.actualWeight}}lb</div>
+          <div class="col">{{workout.target_weight}}lb</div>
+          <div class="col">{{workout.actual_weight}}lb</div>
         </div>
         <div ng-repeat="(num, setData) in workout.sets">
           <div class="row">
@@ -29,8 +27,8 @@
             <div class="col">Actual Reps</div>
           </div>
           <div class="row">
-            <div class="col">{{setData.targetReps}}</div>
-            <div class="col">{{setData.actualReps}}</div>
+            <div class="col">{{setData.target_reps}}</div>
+            <div class="col">{{setData.actual_reps}}</div>
           </div>
         </div>
       </div>

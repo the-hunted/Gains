@@ -40,11 +40,22 @@ app.config(function ($stateProvider, $urlRouterProvider) {
   })
 
   .state('app.plan', {
+    cache: false,
     url: '/plan',
     views: {
       'menuContent': {
         templateUrl: 'templates/plan.html',
         controller: 'PlanCtrl'
+      }
+    }
+  })
+
+  .state('app.calendar', {
+    url: '/calendar',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/calendar.html',
+        controller: 'CalendarCtrl'
       }
     }
   })

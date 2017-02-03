@@ -1,0 +1,12 @@
+<ion-view view-title="Calendar">
+  <ion-content>
+    <h4 class="calendar">Select a date from the calendar to either view/edit a previous workout
+      or to plan a future workout.
+    </h4>
+    <input type="date" class="calendar" ng-model="example.value"
+       placeholder="yyyy-MM-dd" min="2017-01-01" max="2020-12-31" required />
+    <br>
+    <br>
+    <button class="button button-block button-positive" ng-click="showDate()">Select</button>
+  </ion-content>
+</ion-view>
