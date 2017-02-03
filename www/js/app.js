@@ -40,6 +40,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
   })
 
   .state('app.plan', {
+    cache: false,
     url: '/plan',
     views: {
       'menuContent': {

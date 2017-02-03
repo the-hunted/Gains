@@ -6,19 +6,19 @@ app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFa
   function showWorkout() {
     var dayOf = StorageFac.workoutDate;
     if(dayOf){
-      var workout = StorageFac._getByDate(dayOf);
-      if(workout) {
-        $scope.exercises = workout;
-        console.log('showWorkout scope exercises', $scope.exercises);
-      }
+      $scope.day = dayOf;
     } else {
-        $scope.day = new Date().setHours(0, 0, 0, 0);
-
-        console.log('nothing loaded from service, day set', $scope.day);
+      $scope.day = new Date().setHours(0, 0, 0, 0);
+    }
+    var workout = StorageFac._getByDate($scope.day);
+    if(workout) {
+      $scope.exercises = workout;
     }
   }
 
-  showWorkout();
+  $scope.$watch('$viewContentLoaded', function(){
+    showWorkout();
+  });
 
   $scope.exercise =  {
     name: "",
@@ -64,11 +64,12 @@ app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFa
   }
 
   $scope.logWorkout = function() { // takes the exercises collection and saves to local storage
+    console.log('scope day for saved workout', $scope.day);
     StorageFac._add($scope.exercises, $scope.day);
   };
 
   $scope.$on("$destroy", function(){
     StorageFac.workoutDate = null;
     console.log('storage fac destroyed', StorageFac.workoutDate);
-  })
+  });
 }]);
