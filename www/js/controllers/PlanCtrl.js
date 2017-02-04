@@ -1,8 +1,9 @@
-app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFac', function ($scope, $stateParams, ExerciseList, StorageFac) {
+app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFac', 'LokiFac', function ($scope, $stateParams, ExerciseList, StorageFac, LokiFac) {
   
   $scope.day;
   $scope.exercises = [];
   $scope.today = new Date().setHours(0, 0, 0, 0);
+  $scope.isInDb = false;
 
   function showWorkout() {
     var dayOf = StorageFac.workoutDate;
@@ -11,14 +12,23 @@ app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFa
     } else {
       $scope.day = $scope.today;
     }
-    var workout = StorageFac.getByDate($scope.day);
-    if(workout) {
-      $scope.exercises = workout;
+   // var workout = StorageFac.getByDate($scope.day);
+   //get the workout data for that day from the Loki database
+    var workout = LokiFac.getByDay($scope.day);
+    if(workout[0]) {
+      console.log('workout[0].work', workout[0].work);
+      $scope.exercises = workout[0].work;
     }
   }
 
+  var thisObj = this;
   //when the view loads, display the workout for the selected date
   $scope.$watch('$viewContentLoaded', function(){
+    LokiFac.initDB();
+    LokiFac.getAll()
+      .then(function(wods){
+        thisObj.wods = wods;
+      });
     showWorkout();
   });
 
@@ -57,11 +67,6 @@ app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFa
   //list of all the exercises a user can select
   $scope.liftList = ExerciseList;
 
-  //prevent user from being able to edit 'Actual' fields if date is in the future
-  // $scope.canEdit = function() {
-  //   if()
-  // }
-
   //used to add another lift for the day's workout
   $scope.addNewLift = function() {
     var exerciseRecorded = JSON.stringify($scope.exercise);
@@ -69,10 +74,25 @@ app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFa
     $scope.exercises.push(exerciseRecorded); //push that clone to the $scope.exercises object
   }
 
-  //takes the exercises collection and saves to local storage
+  //takes the exercises collection and saves to Loki database (instead of local storage)
   $scope.logWorkout = function() {
-    console.log('scope day for saved workout', $scope.day);
-    StorageFac.add($scope.exercises, $scope.day);
+    //console.log('scope day for saved workout', $scope.day);
+    //StorageFac.add($scope.exercises, $scope.day);
+    var daysWork = LokiFac.getByDay($scope.day);
+    if(daysWork.length > 0){
+      console.log('dayswork', daysWork);
+      LokiFac.updateWorkout({
+        $loki: daysWork[0].$loki,
+        meta: daysWork[0].meta,
+        date: $scope.day,
+        work: $scope.exercises
+      });
+    } else {
+      LokiFac.addWorkout({
+        date: $scope.day,
+        work: $scope.exercises
+      });
+    }
   };
 
   //sets the workoutDate back to null when user leaves plan view
