@@ -30,51 +30,123 @@ angular.module('masa.services', ['ngStorage'])
   };
 })
 
-.factory('WorkoutsFac', function ($http, $window, StorageFac) { // throw into workout planner controller
+.factory('LokiFac', function($q, Loki) {
+  var _db;
+  var _workouts;
+
+  var initDB = function(){
+    //var adapter = new LokiCordovaFSAdapter({"prefix": "loki"});
+    _db = new Loki('workoutsDB', {
+      autosave: true,
+      autosaveInterval: 1000,
+      //adapter: adapter
+    });
+  }
+
+  var getAll = function(){
+    return $q(function(resolve, reject){
+      var options = {};
+      _db.loadDatabase(options, function(){
+        _workouts = _db.getCollection('workouts');
+        if(!_workouts){
+          _workouts = _db.addCollection('workouts');
+        }
+        resolve(_workouts.data);
+      }); 
+    });
+  };
+
+  var addWorkout = function(workout){
+    _workouts.insert(workout);
+    console.log('_workouts after add', _workouts);
+  };
+
+  var getByDay = function(day){
+    var data = _workouts.find({date: day});
+    console.log('data from getbyday', data);
+    return data;
+  }
+
+  var getRecent = function(day){
+    var workView = _workouts.addDynamicView('newWorkouts');
+    workView.applyWhere(function(obj) {
+      return obj.date <= day;
+    });
+    workView.applySort(function(obj1, obj2){
+      return obj2.date - obj1.date;
+    });
+    console.log('workview', workView.data());
+    return workView.data();
+  }
+
+  var updateWorkout = function(workout) {
+    _workouts.update(workout);
+    console.log('_workouts after update', _workouts);
+  }
+
+  return {
+    initDB: initDB,
+    getAll: getAll,
+    getByDay: getByDay,
+    getRecent: getRecent,
+    addWorkout: addWorkout,
+    updateWorkout: updateWorkout
+  }
+})
+
+.factory('WorkoutsFac', function ($http, $window, StorageFac, LokiFac) { // throw into workout planner controller
   var storeWorkout = function(exercisesData) {
     StorageFac.add(exercisesData.date, exercisesData.data);
   };
 
   var getWorkoutHistory = function() {
-    var workouts = StorageFac.getAll();
-    if (!workouts || angular.equals(workouts, {})) {
-      return false;
-    }
-    var MILI_DAY = 86400000;
-
     var today = (new Date()).setHours(0, 0, 0, 0);
-    var sortedDates = Object.keys(workouts).sort();
+    var workouts = LokiFac.getRecent(today);
+    console.log('getWorkoutHistory workouts', workouts);
+    
+    //var workouts = StorageFac.getAll();
+    // if (!workouts) {
+    //   return false;
+    // }
+    // var MILI_DAY = 86400000;
 
-    if (today in workouts) {
-      sortedDates.splice(0, sortedDates.indexOf(today) + 1);
-    } else {
-      if (sortedDates[0] > today) {
-        return false;
-      }
-      var foundClosestDate = false;
-      var dateToCheck = today - MILI_DAY;
+    // // var today = (new Date()).setHours(0, 0, 0, 0);
+    // var sortedDates = Object.keys(workouts).sort();
 
-      while (!foundClosestDate) {
-        if (dateToCheck in workouts) {
-          sortedDates.splice(0, sortedDates.indexOf(dateToCheck) + 1);
-          foundClosestDate = true;
-        } else {
-          dateToCheck -= MILI_DAY;
-        }
-      }
-    }
+    // if (today in workouts) {
+    //   sortedDates.splice(0, sortedDates.indexOf(today) + 1);
+    // } else {
+    //   if (sortedDates[0] > today) {
+    //     return false;
+    //   }
+    //   var foundClosestDate = false;
+    //   var dateToCheck = today - MILI_DAY;
 
-    var workoutsToShow = [];
+    //   while (!foundClosestDate) {
+    //     if (dateToCheck in workouts) {
+    //       sortedDates.splice(0, sortedDates.indexOf(dateToCheck) + 1);
+    //       foundClosestDate = true;
+    //     } else {
+    //       dateToCheck -= MILI_DAY;
+    //     }
+    //   }
+    // }
 
-    var currDate = today;
+    // var workoutsToShow = [];
 
-    for (let i = sortedDates.length - 1; i >= 0; i--) {
-      var exercise = {};
-      exercise[sortedDates[i]] = workouts[sortedDates[i]];
-      workoutsToShow.push(exercise);
-    }
+    // var currDate = today;
 
-    return workoutsToShow;
+    // for (let i = sortedDates.length - 1; i >= sortedDates.length - 11 && i >= 0; i--) {
+    //   if (sortedDates[i] in workouts) {
+    //     var exercise = {};
+    //     exercise[currDate] = workouts[currDate];
+    //     workoutsToShow.push(exercise);
+    //   }
+    //   currDate -= MILI_DAY;
+    // }
+
+    // return workoutsToShow;
+    return workouts;
   };
 
   // var getWorkoutHistory = function() {

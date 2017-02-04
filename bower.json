@@ -21,7 +21,8 @@
   "dependencies": {
     "ionic-material": "^0.4.2",
     "Waves": "waves#^0.7.5",
-    "ngstorage": "^0.3.11"
+    "ngstorage": "^0.3.11",
+    "lokijs": "^1.4.2"
   },
   "resolutions": {
     "angular": "1.5.3",

@@ -17,16 +17,16 @@
       <br>
       <br>
 
-      <fieldset  style="margin-bottom: 20px">
+      <fieldset class"targetReps">
         <h3>Target Reps for each Set</h4>
         <label ng-repeat="i in [1, 2, 3, 4, 5, 6]">
-        <input type="tel" style="margin-right: 10px; display: inline;" class="button button-fab button-positive repsButtons" ng-model="ex.sets[i].target_reps" placeholder="0"></input></label>
+        <input type="tel" class="button button-fab button-positive repsButtons" ng-model="ex.sets[i].target_reps" placeholder="0"></input></label>
       </fieldset>
-
-      <fieldset  style="margin-bottom: 80px">
+        
+      <fieldset class="actualReps">
         <h3>Actual Reps for each Set</h4>
         <label ng-repeat="j in [1, 2, 3, 4, 5, 6]">
-        <input type="tel" style="margin-right: 10px; display: inline;"  class="button button-fab button-positive repsButtons" ng-model="ex.sets[j].actual_reps" placeholder="0" ng-disabled="day > today"></input></label>
+        <input type="tel" class="button button-fab button-positive repsButtons" ng-model="ex.sets[j].actual_reps" placeholder="0" ng-disabled="day > today"></input></label>
       </fieldset>
     </div>
     <button class="addfields button button-block" ng-click="addNewLift()">Add Exercise</button>

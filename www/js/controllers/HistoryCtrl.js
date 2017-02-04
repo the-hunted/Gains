@@ -1,19 +1,18 @@
-app.controller('HistCtrl', function ($scope, WorkoutsFac, StorageFac) {
+app.controller('HistCtrl', function ($scope, WorkoutsFac, StorageFac, LokiFac) {
   $scope.toggleGroup = function(group) {
     group.show = !group.show;
   };
   $scope.isGroupShown = function(group) {
     return group.show;
   };
-
-  $scope.history = WorkoutsFac.getWorkoutHistory();
-
-  if ($scope.history) {
-    console.log($scope.history);
-    $scope.dates = $scope.history.map(function(exerciseObj) {
-      return Object.keys(exerciseObj)[0];
-    });
-
-    console.log($scope.dates);
-  }
+  
+  $scope.history;
+  $scope.$watch('$viewContentLoaded', function(){
+    LokiFac.initDB();
+    LokiFac.getAll()
+      .then(function(wods){
+        $scope.history = WorkoutsFac.getWorkoutHistory();
+        console.log('scope history', $scope.history);
+      });
+  });
 });
