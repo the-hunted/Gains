@@ -1,5 +1,12 @@
 app.controller('HistCtrl', function ($scope, WorkoutsFac, StorageFac) {
-  $scope.history = WorkoutsFac.getWorkoutHistory()
+  $scope.toggleGroup = function(group) {
+    group.show = !group.show;
+  };
+  $scope.isGroupShown = function(group) {
+    return group.show;
+  };
+
+  $scope.history = WorkoutsFac.getWorkoutHistory();
 
   if ($scope.history) {
     console.log($scope.history);

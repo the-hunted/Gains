@@ -37,7 +37,7 @@ angular.module('masa.services', ['ngStorage'])
 
   var getWorkoutHistory = function() {
     var workouts = StorageFac.getAll();
-    if (!workouts) {
+    if (!workouts || angular.equals(workouts, {})) {
       return false;
     }
     var MILI_DAY = 86400000;
