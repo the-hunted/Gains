@@ -56,9 +56,10 @@ angular.module('masa.services', ['ngStorage'])
     });
   };
 
-  var addWorkout = function(workout){
+  var addWorkout = function(workout, callback){
     _workouts.insert(workout);
     console.log('_workouts after add', _workouts);
+    callback();
   };
 
   var getByDay = function(day){
@@ -79,9 +80,10 @@ angular.module('masa.services', ['ngStorage'])
     return workView.data();
   }
 
-  var updateWorkout = function(workout) {
+  var updateWorkout = function(workout, callback) {
     _workouts.update(workout);
     console.log('_workouts after update', _workouts);
+    callback();
   }
 
   return {
