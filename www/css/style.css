@@ -11,9 +11,17 @@
   margin: 0 auto;
 }
 
+.home-view {
+  background-image: url('../img/americanFlag3.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.home-view h2{
+  font-size: 34px;
+}
+
 .masa-header{
   text-align: center;
-  text-decoration: underline;
 }
 
 blockquote {
