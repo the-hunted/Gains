@@ -1,4 +1,4 @@
-app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFac', 'LokiFac', function ($scope, $stateParams, ExerciseList, StorageFac, LokiFac) {
+app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFac', 'LokiFac', '$ionicPopup', function ($scope, $stateParams, ExerciseList, StorageFac, LokiFac, $ionicPopup) {
   
   $scope.day;
   $scope.exercises = [];
@@ -58,6 +58,17 @@ app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFa
       }
     }
   };
+
+  $scope.showPopup = function(){
+    var popup = $ionicPopup.alert({
+      title: 'Workout Saved',
+      template: 'Your workout was saved!',
+    });
+
+    popup.then(function(res) {
+      console.log('tapped');
+    });
+  }
  
   //list of all the exercises a user can select
   $scope.liftList = ExerciseList;
@@ -79,11 +90,15 @@ app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFa
         meta: daysWork[0].meta,
         date: $scope.day,
         work: $scope.exercises
+      }, function(){
+        $scope.showPopup();
       });
     } else {
       LokiFac.addWorkout({
         date: $scope.day,
         work: $scope.exercises
+      }, function(){
+        $scope.showPopup();
       });
     }
   };

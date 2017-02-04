@@ -3,7 +3,7 @@
     <h3 ng-model="day">{{day | date: 'mediumDate'}}</h3>
     <div class="exerciseForm" ng-repeat="ex in exercises track by $index">
       <label class="item item-input item-stacked-label item-assertive">Exercise
-        <select ng-model="ex.name">
+        <select ng-model="ex.name" class="exerciseSelect">
           <option ng-repeat="lift in liftList" value="{{lift.name}}">{{lift.name}}</option>
         </select>
       </label>
