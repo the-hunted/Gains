@@ -2,13 +2,14 @@ app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFa
   
   $scope.day;
   $scope.exercises = [];
+  $scope.today = new Date().setHours(0, 0, 0, 0);
 
   function showWorkout() {
     var dayOf = StorageFac.workoutDate;
     if(dayOf){
       $scope.day = dayOf;
     } else {
-      $scope.day = new Date().setHours(0, 0, 0, 0);
+      $scope.day = $scope.today;
     }
     var workout = StorageFac.getByDate($scope.day);
     if(workout) {
@@ -23,32 +24,32 @@ app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFa
 
   $scope.exercise =  {
     name: "",
-    target_weight: 0,
-    actual_weight: 0,
+    target_weight: null,
+    actual_weight: null,
     sets: {
       1: {
-        target_reps: 0,
-        actual_reps: 0
+        target_reps: null,
+        actual_reps: null
       },
       2: {
-        target_reps: 0,
-        actual_reps: 0
+        target_reps: null,
+        actual_reps: null
       },
       3: {
-        target_reps: 0,
-        actual_reps: 0
+        target_reps: null,
+        actual_reps: null
       },
       4: {
-        target_reps: 0,
-        actual_reps: 0
+        target_reps: null,
+        actual_reps: null
       },
       5: {
-        target_reps: 0,
-        actual_reps: 0
+        target_reps: null,
+        actual_reps: null
       },
       6: {
-        target_reps: 0,
-        actual_reps: 0
+        target_reps: null,
+        actual_reps: null
       }
     }
   };
@@ -56,8 +57,13 @@ app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFa
   //list of all the exercises a user can select
   $scope.liftList = ExerciseList;
 
+  //prevent user from being able to edit 'Actual' fields if date is in the future
+  // $scope.canEdit = function() {
+  //   if()
+  // }
+
   //used to add another lift for the day's workout
-  $scope.addNewLift = function(){
+  $scope.addNewLift = function() {
     var exerciseRecorded = JSON.stringify($scope.exercise);
     exerciseRecorded = JSON.parse(exerciseRecorded); //create clone of the $scope.exercise object
     $scope.exercises.push(exerciseRecorded); //push that clone to the $scope.exercises object
