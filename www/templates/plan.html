@@ -19,14 +19,14 @@
 
       <fieldset  style="margin-bottom: 20px">
         <h3>Target Reps for each Set</h4>
-        <label ng-repeat="i in [1, 2, 3, 4, 5, 6]">Set {{i}}
-        <input type="tel" style="margin-right: 40px; display: inline; color: white" class="button button-fab button-positive repsButtons" ng-model="ex.sets[i].target_reps" placeholder="0"></input></label>
+        <label ng-repeat="i in [1, 2, 3, 4, 5, 6]">{{i}}
+        <input type="tel" style="margin-right: 40px; display: inline;" class="button button-fab button-positive repsButtons" ng-model="ex.sets[i].target_reps" placeholder="0"></input></label>
       </fieldset>
         
       <fieldset  style="margin-bottom: 80px">
         <h3>Actual Reps for each Set</h4>
-        <label ng-repeat="j in [1, 2, 3, 4, 5, 6]">Set {{j}}
-        <input type="tel" style="margin-right: 40px; display: inline; color: white"  class="button button-fab button-positive repsButtons" ng-model="ex.sets[j].actual_reps" placeholder="0" ng-disabled="day > today"></input></label>
+        <label ng-repeat="j in [1, 2, 3, 4, 5, 6]">{{j}}
+        <input type="tel" style="margin-right: 40px; display: inline;"  class="button button-fab button-positive repsButtons" ng-model="ex.sets[j].actual_reps" placeholder="0" ng-disabled="day > today"></input></label>
       </fieldset>
     </div>
     <button class="addfields button button-block" ng-click="addNewLift()">Add Exercise</button>
