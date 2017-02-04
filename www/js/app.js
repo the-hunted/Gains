@@ -61,6 +61,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
   })
 
   .state('app.history', {
+    cache: false,
     url: '/history',
     views: {
       'menuContent': {
