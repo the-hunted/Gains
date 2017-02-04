@@ -68,13 +68,10 @@ angular.module('masa.services', ['ngStorage'])
 
     var currDate = today;
 
-    for (let i = sortedDates.length - 1; i >= sortedDates.length - 11 && i >= 0; i--) {
-      if (sortedDates[i] in workouts) {
-        var exercise = {};
-        exercise[currDate] = workouts[currDate];
-        workoutsToShow.push(exercise);
-      }
-      currDate -= MILI_DAY;
+    for (let i = sortedDates.length - 1; i >= 0; i--) {
+      var exercise = {};
+      exercise[sortedDates[i]] = workouts[sortedDates[i]];
+      workoutsToShow.push(exercise);
     }
 
     return workoutsToShow;
