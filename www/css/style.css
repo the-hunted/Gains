@@ -70,3 +70,7 @@ blockquote p {
   display: block;
   margin: 8px auto;
 }
+
+.history-row > .col {
+  padding: 0 5px;
+}
