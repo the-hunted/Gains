@@ -1,46 +1,50 @@
 <ion-view view-title="History">
   <ion-content>
-    <ion-list ng-if="history">
+    <ion-list ng-if="history.length" show-delete="data.showDelete">
       <div ng-repeat="(i, item) in history">
-        <ion-item class="item-stable"
-                  ng-click="toggleGroup(item)"
-                  ng-class="{active: isGroupShown(item)}">
+        <ion-item
+          class="item-stable item-remove-animate"
+          ng-click="toggleGroup(item)"
+          ng-class="{active: isGroupShown(item)}"
+          item="item"
+        >
           <i class="icon" ng-class="isGroupShown(item) ? 'ion-minus' : 'ion-plus'"></i>
           &nbsp;
           {{item.date | date: 'mediumDate'}}
+          <ion-option-button class="button-assertive" ng-click="onItemDelete(item)">
+            Delete
+          </ion-option-button>
         </ion-item>
-        <ion-item class="item-accordion"
-                  ng-repeat="workout in item.work"
-                  ng-show="isGroupShown(item)">
-
-          <!-- <h2>{{dates[i] | date}}</h2> -->
+        <ion-item
+          class="item-accordion"
+          ng-repeat="workout in item.work"
+          ng-show="isGroupShown(item)"
+        >
           <div>
             <div class="row">
               <div class="col">
                 <h3>{{workout.name}}</h3>
               </div>
             </div>
-            <div class="row">
-              <div class="col">Target Weight</div>
-              <div class="col">Actual Weight</div>
-            </div>
-            <div class="row">
+            <div class="row history-row">
+              <div class="col">Target</div>
               <div class="col">{{workout.target_weight}}lb</div>
+              <div class="col">Actual</div>
               <div class="col">{{workout.actual_weight}}lb</div>
             </div>
             <div ng-repeat="(num, setData) in workout.sets">
-              <div class="row">
-                <div class="col">
-                  <h4>Set {{num}}</h4>
+              <div ng-if="setData.target_reps || setData.actual_reps">
+                <div class="row">
+                  <div class="col">
+                    <h4>Set {{num}}</h4>
+                  </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col">Target Reps</div>
-                <div class="col">Actual Reps</div>
-              </div>
-              <div class="row">
-                <div class="col">{{setData.target_reps}}</div>
-                <div class="col">{{setData.actual_reps}}</div>
+                <div class="row history-row">
+                  <div class="col">Target</div>
+                  <div class="col">{{setData.target_reps}}</div>
+                  <div class="col">Actual</div>
+                  <div class="col">{{setData.actual_reps || 'n/a'}}</div>
+                </div>
               </div>
             </div>
           </div>
@@ -48,8 +52,10 @@
       </ion-item>
     </ion-list>
 
-    <div class="row" ng-if="!history">
-      No past workouts exist.
+    <div class="row" ng-if="!history.length">
+      <div class="col">
+        <h3>No past workouts exist.</h3>
+      </div>
     </div>
   </ion-content>
 </ion-view>

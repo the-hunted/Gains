@@ -52,7 +52,7 @@ angular.module('masa.services', ['ngStorage'])
           _workouts = _db.addCollection('workouts');
         }
         resolve(_workouts.data);
-      }); 
+      });
     });
   };
 
@@ -66,7 +66,7 @@ angular.module('masa.services', ['ngStorage'])
     var data = _workouts.find({date: day});
     console.log('data from getbyday', data);
     return data;
-  }
+  };
 
   var getRecent = function(day){
     var workView = _workouts.addDynamicView('newWorkouts');
@@ -78,13 +78,17 @@ angular.module('masa.services', ['ngStorage'])
     });
     console.log('workview', workView.data());
     return workView.data();
-  }
+  };
 
   var updateWorkout = function(workout, callback) {
     _workouts.update(workout);
     console.log('_workouts after update', _workouts);
     callback();
-  }
+  };
+
+  var deleteWorkout = function(date) {
+    _workouts.removeWhere({ 'date': date });
+  };
 
   return {
     initDB: initDB,
@@ -92,7 +96,8 @@ angular.module('masa.services', ['ngStorage'])
     getByDay: getByDay,
     getRecent: getRecent,
     addWorkout: addWorkout,
-    updateWorkout: updateWorkout
+    updateWorkout: updateWorkout,
+    deleteWorkout: deleteWorkout
   }
 })
 
@@ -105,7 +110,7 @@ angular.module('masa.services', ['ngStorage'])
     var today = (new Date()).setHours(0, 0, 0, 0);
     var workouts = LokiFac.getRecent(today);
     console.log('getWorkoutHistory workouts', workouts);
-    
+
     //var workouts = StorageFac.getAll();
     // if (!workouts) {
     //   return false;
