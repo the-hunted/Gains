@@ -2,7 +2,8 @@
   <ion-content class='has-footer'>
 
     <div class='masa-header'>
-      <h1>Make America Swole Again</h1>
+      <h1>Make America Swole</h1>
+      <h1 id="again"><i class="ion-android-star"></i>    Again    <i class="ion-android-star"></i></h1>
     </div>
 
     <blockquote class='quote'>
@@ -11,7 +12,7 @@
     </blockquote>
 
     <div class="card">
-      <div class="item item-divider"><strong>My Goals For Today:</strong></div>
+      <div class="item item-divider"><strong>My Swole Goals For Today:</strong></div>
         <ion-list show-delete="data.showDelete">
             <ion-item ng-repeat="item in goals" item="item" class="item-remove-animate" ng-click="toggleIcon($index)">
                   <i class={{item.icon}} ></i>
