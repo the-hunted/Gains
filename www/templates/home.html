@@ -1,49 +1,52 @@
 <ion-view view-title="Home">
-  <ion-content>
-    <div class='quote' ng-init='getQuote()' >
-    <div class='quote'>
-      <h1>Welcome to MASA</h1>
-      <h6>Making America Swole Again</h6>
-      <br></br>
-      <h2>{{quote.quote}}</h2>
-      <h4>-{{quote.author}}</h4>
+  <ion-content class='has-footer'>
+
+    <div>
+      <h3>MAKE AMERICA SWOLE AGAIN</h3>
+      <h5>GET YUGE!</h5>
     </div>
 
-    <br></br>
+    <blockquote class='quote'>
+      <h3>“I have never seen a thin person drinking Diet Coke.”</h3>
+      <h5>- Donald J. Trump</h5>
+    </blockquote>
 
-    <h4>My Goals For Today:</h4>
-
-    <ion-list show-delete="data.showDelete">
-        <ion-item ng-repeat="item in goals" item="item" class="item-remove-animate">
-          {{ item.goal }}
-          <ion-option-button class="button-assertive" ng-click="onItemDelete(item)">
-            Delete
-          </ion-option-button>
-        </ion-item>
-    </ion-list>
-
-    <button id="addGoals" class="button button-block button-positive" ng-click="openModal()">
-      Add Goals
-    </button>
+    <div class="card">
+      <div class="item item-divider"><strong>My Goals For Today:</strong></div>
+        <ion-list show-delete="data.showDelete">
+            <ion-item ng-repeat="item in goals" item="item" class="item-remove-animate" ng-click="toggleIcon($index)">
+                  <i class={{item.icon}} ></i>
+                  {{ item.goal }}
+              <ion-option-button class="button-assertive" ng-click="onItemDelete(item)">
+                Delete
+              </ion-option-button>
+            </ion-item>
+        </ion-list>
+    </div>
 
     <!-- Goal Modal -->
     <script id="templates/modal.html" type="text/ng-template">
       <ion-modal-view>
         <ion-header-bar class="bar bar-header bar-positive">
           <h1 class="title">New Goal</h1>
-          <button class="button button-clear button-primary" ng-click="closeModal()">Cancel</button>
+          <button class="button button-clear button-primary" ng-click="closeModal()"><i class="ion-ios-close"></i></button>
         </ion-header-bar>
         <ion-content class="padding">
           <div class="list">
             <label class="item item-input">
-              <span class="input-label">Goal:</span>
-              <input ng-model="userInput" type="text">
+              <span class="input-label">Input Goal:</span>
+              <input ng-model="userInput" type="text" maxlength="20">
             </label>
             <button class="button button-full button-positive" ng-click="createGoal(userInput); userInput = null">Create</button>
           </div>
         </ion-content>
       </ion-modal-view>
     </script>
-
   </ion-content>
+
+  <ion-footer-bar class="bar-positive" ng-click="openModal()">
+    <div class="title">Add Goals</div>
+  </ion-footer-bar>
+
 </ion-view>
+
