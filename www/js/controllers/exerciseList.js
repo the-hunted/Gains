@@ -128,7 +128,7 @@ app.constant("ExerciseList", [
    "muscle_group": "Arms"
  },
  {
-   "name": "Pronated Dumbbell Hammer Curl (Palms Facing Upward)",
+   "name": "Pronated Dumbbell Hammer Curl",
    "muscle_group": "Arms"
  },
  {
@@ -348,7 +348,7 @@ app.constant("ExerciseList", [
    "muscle_group": "Shoulders"
  },
  {
-   "name": "Seated Dumbbell Long Leg Should Press",
+   "name": "Seated Dumbbell Shoulder Press",
    "muscle_group": "Shoulders"
  },
  {
@@ -476,7 +476,7 @@ app.constant("ExerciseList", [
    "muscle_group": "Legs"
  },
  {
-   "name": "Leg Extension (WARNING: Isolation name. Do NOT overdo  wt.)",
+   "name": "Leg Extension",
    "muscle_group": "Legs"
  },
  {
@@ -524,7 +524,7 @@ app.constant("ExerciseList", [
    "muscle_group": "Legs"
  },
  {
-   "name": "Barbell Bench Press Negatives (Inc. wt.)",
+   "name": "Barbell Bench Press Negatives",
    "muscle_group": "Chest"
  },
  {
@@ -876,10 +876,6 @@ app.constant("ExerciseList", [
    "muscle_group": "Core"
  },
  {
-   "name": "ROTC Ab Drill (X Situps, X Crunches, Y PUs, X Toe Touches, X Jack Knives, Y PUs, Plank, Scissors, Y PUs) ",
-   "muscle_group": "Core"
- },
- {
    "name": "Russian Twist with MB",
    "muscle_group": "Core"
  },
@@ -928,7 +924,7 @@ app.constant("ExerciseList", [
    "muscle_group": "Forearms"
  },
  {
-   "name": "Dumbbell Holds (I also find it really builds your forearms if you make a concious effort to always rotate your Dumbbell before you put it back on the rack so that the number faces up)",
+   "name": "Dumbbell Holds",
    "muscle_group": "Forearms"
  },
  {
@@ -936,7 +932,7 @@ app.constant("ExerciseList", [
    "muscle_group": "Forearms"
  },
  {
-   "name": "Plate Pinch (Use 5 lb. plates. Incr. time-held. Or pinch an extra plate)",
+   "name": "Plate Pinch",
    "muscle_group": "Forearms"
  },
  {
@@ -960,7 +956,7 @@ app.constant("ExerciseList", [
    "muscle_group": "Forearms"
  },
  {
-   "name": "Dumbbell Wall Squat with Physioball Support and MB Squeeze",
+   "name": "Dumbbell Wall Squat with Physioball Support",
    "muscle_group": "Forearms"
  },
  {

@@ -5,6 +5,11 @@
   margin-top: 50px;
 }
 
+.button-medium {
+  text-align: center;
+  margin: 0 auto;
+}
+
 /*#calendarInstruct {
   text-align: center;
 }*/
