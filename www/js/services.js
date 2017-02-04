@@ -57,7 +57,6 @@ angular.module('masa.services', ['ngStorage'])
   };
 
   var addWorkout = function(workout){
-    console.log('addWorkout workout', workout);
     _workouts.insert(workout);
     console.log('_workouts after add', _workouts);
   };

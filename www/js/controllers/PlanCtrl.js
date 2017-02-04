@@ -12,7 +12,6 @@ app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFa
     } else {
       $scope.day = $scope.today;
     }
-   // var workout = StorageFac.getByDate($scope.day);
    //get the workout data for that day from the Loki database
     var workout = LokiFac.getByDay($scope.day);
     if(workout[0]) {
@@ -21,14 +20,10 @@ app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFa
     }
   }
 
-  var thisObj = this;
   //when the view loads, display the workout for the selected date
   $scope.$watch('$viewContentLoaded', function(){
     LokiFac.initDB();
-    LokiFac.getAll()
-      .then(function(wods){
-        thisObj.wods = wods;
-      });
+    LokiFac.getAll();
     showWorkout();
   });
 
@@ -76,8 +71,6 @@ app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFa
 
   //takes the exercises collection and saves to Loki database (instead of local storage)
   $scope.logWorkout = function() {
-    //console.log('scope day for saved workout', $scope.day);
-    //StorageFac.add($scope.exercises, $scope.day);
     var daysWork = LokiFac.getByDay($scope.day);
     if(daysWork.length > 0){
       console.log('dayswork', daysWork);
