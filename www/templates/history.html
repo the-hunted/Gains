@@ -17,31 +17,31 @@
           <div>
             <div class="row">
               <div class="col">
-                <h4>{{workout.name}}</h3>
+                <h3>{{workout.name}}</h3>
               </div>
             </div>
             <div class="row">
-              <div class="col">Target: {{workout.target_weight}}lb</div>
-              <div class="col">Actual: {{workout.actual_weight}}lb</div>
+              <div class="col">Target Weight</div>
+              <div class="col">Actual Weight</div>
             </div>
-            <!-- <div class="row">
+            <div class="row">
               <div class="col">{{workout.target_weight}}lb</div>
               <div class="col">{{workout.actual_weight}}lb</div>
-            </div> -->
+            </div>
             <div ng-repeat="(num, setData) in workout.sets">
               <div class="row">
                 <div class="col">
-                  <h5>Set {{num}}</h5>
+                  <h4>Set {{num}}</h4>
                 </div>
               </div>
               <div class="row">
-                <div class="col">Target: {{setData.target_reps}}</div>
-                <div class="col">Actual: {{setData.actual_reps}}</div>
+                <div class="col">Target Reps</div>
+                <div class="col">Actual Reps</div>
               </div>
-              <!-- <div class="row">
+              <div class="row">
                 <div class="col">{{setData.target_reps}}</div>
                 <div class="col">{{setData.actual_reps}}</div>
-              </div> -->
+              </div>
             </div>
           </div>
         </div>
