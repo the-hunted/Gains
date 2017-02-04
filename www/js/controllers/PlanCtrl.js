@@ -60,14 +60,22 @@ app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFa
   };
 
   //show an alert whenever the user saves a workout
-  $scope.showPopup = function(){
-    var popup = $ionicPopup.alert({
+  $scope.successPopup = function() {
+    var success = $ionicPopup.alert({
       title: 'Workout Saved',
       template: 'Your workout was saved!',
     });
 
-    popup.then(function(res) {
+    success.then(function(res) {
       console.log('tapped');
+    });
+  }
+
+  //show a different alert if the user clicks save w/o inputting anything
+  $scope.failPopup = function() {
+    var fail = $ionicPopup.alert({
+      title: 'Failed to Save',
+      template: 'Type in your workout plan before saving.'
     });
   }
  
@@ -83,24 +91,28 @@ app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFa
 
   //takes the exercises collection and saves to Loki database (instead of local storage)
   $scope.logWorkout = function() {
-    var daysWork = LokiFac.getByDay($scope.day);
-    if(daysWork.length > 0){
-      console.log('dayswork', daysWork);
-      LokiFac.updateWorkout({
-        $loki: daysWork[0].$loki,
-        meta: daysWork[0].meta,
-        date: $scope.day,
-        work: $scope.exercises
-      }, function(){
-        $scope.showPopup();
-      });
+    if($scope.exercises.length > 0) {
+      var daysWork = LokiFac.getByDay($scope.day); //use getByDay to get the $loki and meta
+      if(daysWork.length > 0){
+        console.log('dayswork', daysWork);
+        LokiFac.updateWorkout({
+          $loki: daysWork[0].$loki,
+          meta: daysWork[0].meta,
+          date: $scope.day,
+          work: $scope.exercises
+        }, function(){
+          $scope.successPopup();
+        });
+      } else {
+        LokiFac.addWorkout({
+          date: $scope.day,
+          work: $scope.exercises
+        }, function(){
+          $scope.successPopup();
+        });
+      }
     } else {
-      LokiFac.addWorkout({
-        date: $scope.day,
-        work: $scope.exercises
-      }, function(){
-        $scope.showPopup();
-      });
+      $scope.failPopup();
     }
   };
 
