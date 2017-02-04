@@ -52,3 +52,15 @@ blockquote p {
 .list .item.item-accordion.ng-hide-remove {
   display: block !important;
 }
+
+.targetReps {
+  margin-bottom: 20px;
+}
+
+.actualReps {
+  margin-bottom: 80px;
+}
+
+.repsButton {
+  display: inline;
+}
