@@ -59,6 +59,7 @@ app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFa
     }
   };
 
+  //show an alert whenever the user saves a workout
   $scope.showPopup = function(){
     var popup = $ionicPopup.alert({
       title: 'Workout Saved',
