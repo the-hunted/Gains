@@ -5,6 +5,9 @@ app.controller('HomeCtrl', ['$scope', '$http','$ionicModal', '$ionicPopup', func
   $scope.shouldShowDelete = false;
   $scope.shouldShowReorder = false;
   $scope.listCanSwipe = true
+  // $scope.iconCheck = "ion-android-checkbox"
+  // $scope.iconBlank = "icon ion-android-checkbox-outline-blank"
+  // $scope.isChecked = false;
   $scope.goals = [];
 
   //Add user input to goal list
@@ -16,10 +19,20 @@ app.controller('HomeCtrl', ['$scope', '$http','$ionicModal', '$ionicPopup', func
     } else if (input.replace(/\s/g, '').length === 0) {
       $scope.showAlertInputNull();
     } else {
-      $scope.goals.push({ goal: input });
+      $scope.goals.push({ goal: input, checked: false, icon: "icon ion-android-checkbox-outline-blank" });
       $scope.modal.hide();
     }
   };
+
+  $scope.toggleIcon = function(index) {
+    if($scope.goals[index].checked) {
+      $scope.goals[index].icon = "icon ion-android-checkbox-outline-blank";
+      $scope.goals[index].checked = !$scope.goals[index].checked;
+    } else {
+      $scope.goals[index].icon = "ion-android-checkbox";
+      $scope.goals[index].checked = !$scope.goals[index].checked;
+    }
+  }
 
   //Delete list Item
   $scope.onItemDelete = function(item) {
@@ -36,7 +49,7 @@ app.controller('HomeCtrl', ['$scope', '$http','$ionicModal', '$ionicPopup', func
 
   //Show Modal
   $scope.openModal = function() {
-    if($scope.goals.length < 3)
+    if($scope.goals.length < 4)
       $scope.modal.show();
     else {
       $scope.showAlertTooMany();
