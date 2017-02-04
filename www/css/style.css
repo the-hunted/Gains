@@ -65,3 +65,8 @@ blockquote p {
   /*width: 235px;*/
   width: 75%;
 }
+
+.rep-btn {
+  display: block;
+  margin: 8px auto;
+}
