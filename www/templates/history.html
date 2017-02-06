@@ -1,6 +1,6 @@
 <ion-view view-title="History">
   <ion-content>
-    <ion-list ng-if="history.length" show-delete="data.showDelete">
+    <ion-list class="animate-ripple" ng-if="history.length" show-delete="data.showDelete">
       <div ng-repeat="(i, item) in history">
         <ion-item
           class="item-stable item-remove-animate"
@@ -27,23 +27,39 @@
               </div>
             </div>
             <div class="row history-row">
-              <div class="col">Target</div>
-              <div class="col">{{workout.target_weight}}lb</div>
-              <div class="col">Actual</div>
-              <div class="col">{{workout.actual_weight}}lb</div>
+              <div ng-if="workout.target_weight" class="col-25">
+                Target
+              </div>
+              <div ng-if="workout.target_weight" class="col-25">
+                {{workout.target_weight}}lb
+              </div>
+              <div ng-if="workout.actual_weight" class="col-25">
+                Actual
+              </div>
+              <div ng-if="workout.actual_weight" class="col-25">
+                {{workout.actual_weight}}lb
+              </div>
             </div>
             <div ng-repeat="(num, setData) in workout.sets">
               <div ng-if="setData.target_reps || setData.actual_reps">
                 <div class="row">
                   <div class="col">
-                    <h4>Set {{num}}</h4>
+                    <h4>Set {{num}} Reps</h4>
                   </div>
                 </div>
                 <div class="row history-row">
-                  <div class="col">Target</div>
-                  <div class="col">{{setData.target_reps}}</div>
-                  <div class="col">Actual</div>
-                  <div class="col">{{setData.actual_reps || 'n/a'}}</div>
+                  <div ng-if="setData.target_reps" class="col-25">
+                    Target
+                  </div>
+                  <div ng-if="setData.target_reps" class="col-25">
+                    {{setData.target_reps}}
+                  </div>
+                  <div ng-if="setData.actual_reps" class="col-25">
+                    Actual
+                  </div>
+                  <div ng-if="setData.actual_reps" class="col-25">
+                    {{setData.actual_reps || 'n/a'}}
+                  </div>
                 </div>
               </div>
             </div>

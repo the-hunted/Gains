@@ -62,15 +62,34 @@ blockquote p {
 }
 
 .exerciseSelect {
-  /*width: 235px;*/
   width: 75%;
 }
 
 .rep-btn {
-  display: block;
-  margin: 8px auto;
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.rep-top-row {
+  margin-bottom: 10px;
 }
 
 .history-row > .col {
   padding: 0 5px;
+}
+
+.menu-open .bar.bar-header.expanded {
+  background-size: 0%;
+}
+
+.menu .avatar{
+  left: 105px;
+  top: 42.5px;
+  margin-bottom: 42.5px;
+}
+
+.item-input input[type="tel"] {
+  margin-left: 22%;
+  width: 10%;
 }

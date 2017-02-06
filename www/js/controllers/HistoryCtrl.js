@@ -1,4 +1,4 @@
-app.controller('HistCtrl', function ($scope, WorkoutsFac, StorageFac, LokiFac) {
+app.controller('HistCtrl', function ($scope, WorkoutsFac, StorageFac, LokiFac, ionicMaterialMotion) {
   LokiFac.initDB();
   $scope.history = [];
 
@@ -18,7 +18,10 @@ app.controller('HistCtrl', function ($scope, WorkoutsFac, StorageFac, LokiFac) {
     LokiFac.getAll()
       .then(function(wods){
         $scope.history = WorkoutsFac.getWorkoutHistory();
-        console.log('scope history', $scope.history);
       });
+  });
+
+  angular.element(document).ready(function () {
+    ionicMaterialMotion.ripple();
   });
 });
