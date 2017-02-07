@@ -5,9 +5,6 @@ app.controller('HomeCtrl', ['$scope', '$http','$ionicModal', '$ionicPopup', func
   $scope.shouldShowDelete = false;
   $scope.shouldShowReorder = false;
   $scope.listCanSwipe = true
-  // $scope.iconCheck = "ion-android-checkbox"
-  // $scope.iconBlank = "icon ion-android-checkbox-outline-blank"
-  // $scope.isChecked = false;
   $scope.goals = [];
 
   //Add user input to goal list
@@ -82,28 +79,20 @@ app.controller('HomeCtrl', ['$scope', '$http','$ionicModal', '$ionicPopup', func
   $scope.$on('$destroy', function() {
     $scope.modal.remove();
   });
-  // // Execute action on hide modal
-  // $scope.$on('modal.hidden', function() {
-  //   // Execute action
-  // });
-  // // Execute action on remove modal
-  // $scope.$on('modal.removed', function() {
-  //   // Execute action
-  // });
 
   //Get quote from quote API
-  $scope.getQuote = function () {
-    $http.get(apiUrl)
-    .then(function(response) {
-      var data = response.data.contents.quotes;
-      data.forEach(function(item) {
-        $scope.quote = item
-      });
-    })
-    .catch(function(error) {
-      console.log ('Error getting from Quote API', error);
-    });
-  }
+  // $scope.getQuote = function () {
+  //   $http.get(apiUrl)
+  //   .then(function(response) {
+  //     var data = response.data.contents.quotes;
+  //     data.forEach(function(item) {
+  //       $scope.quote = item
+  //     });
+  //   })
+  //   .catch(function(error) {
+  //     console.log ('Error getting from Quote API', error);
+  //   });
+  // }
 
 
   $ionicModal.fromTemplateUrl('templates/modal.html', {

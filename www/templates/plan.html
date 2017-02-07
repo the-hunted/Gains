@@ -1,44 +1,44 @@
 <ion-view view-title="Plan Your Workout">
   <ion-content class="im-wrapper">
     <h3 ng-model="day">{{day | date: 'mediumDate'}}</h3>
-    <div class="exerciseForm" ng-repeat="ex in exercises track by $index">
-      <label class="item item-input item-stacked-label item-assertive">Exercise
-        <select ng-model="ex.name" class="exerciseSelect">
+    <div class="list" ng-repeat="ex in exercises track by $index">
+      <label class="item item-input item-select">
+        <span class="input-label">Exercise</span>
+        <select ng-model="ex.name">
+          <option value="">Select exercise</option>
           <option ng-repeat="lift in liftList" value="{{lift.name}}">{{lift.name}}</option>
         </select>
       </label>
-      <br>
-      <br>
-      <label class="item item-input item-label item-assertive">
-        Target Weight
+      <label class="item item-input">
+        <span class="input-label">Target Weight</span>
+        <input
+          type="tel"
+          class="weight-input"
+          ng-model="ex.target_weight"
+          placeholder="0"
+          ng-change="logInputVal()"
+        >
       </label>
-      <input
-        type="tel"
-        class="button button-medium button-positive"
-        ng-model="ex.target_weight"
-        placeholder="0"
-      >
-      <br>
-      <label class="item item-input item-label item-assertive">
-        Actual Weight
+      <label class="item item-input">
+        <span class="input-label">Actual Weight</span>
+        <input
+          type="tel"
+          class="weight-input"
+          ng-model="ex.actual_weight"
+          placeholder="0"
+          ng-disabled="day > today"
+        >
       </label>
-      <input
-        type="tel"
-        class="button button-medium button-positive"
-        ng-model="ex.actual_weight"
-        placeholder="0"
-        ng-disabled="day > today"
-      >
-      <br>
-      <br>
 
       <fieldset class="target-reps">
         <div class="row">
           <div class="col">
-            <h4>Target Reps for each Set</h4>
+            <label class="item item-input">
+              <span class="label-input">Target Reps for each Set</span>
+            </label>
           </div>
         </div>
-        <div class="row">
+        <div class="row rep-top-row">
           <div class="col-33" ng-repeat="i in [1, 2, 3]">
             <input
               type="tel"
@@ -60,13 +60,17 @@
         </div>
       </fieldset>
 
+      <br>
+
       <fieldset class="actual-reps">
         <div class="row">
           <div class="col">
-            <h4>Actual Reps for each Set</h4>
+            <label class="item item-input">
+              <span class="label-input">Actual Reps for each Set</span>
+            </label>
           </div>
         </div>
-        <div class="row">
+        <div class="row rep-top-row">
           <div class="col-33" ng-repeat="i in [1, 2, 3]">
             <input
               type="tel"

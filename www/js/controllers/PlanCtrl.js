@@ -1,5 +1,5 @@
 app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFac', 'LokiFac', '$ionicPopup', function ($scope, $stateParams, ExerciseList, StorageFac, LokiFac, $ionicPopup) {
-  
+
   $scope.day;
   $scope.exercises = [];
   $scope.today = new Date().setHours(0, 0, 0, 0);
@@ -59,6 +59,10 @@ app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFa
     }
   };
 
+  $scope.logInputVal = function(e) {
+    console.log($scope.exercises.target_wieght);
+  };
+
   //show an alert whenever the user saves a workout
   $scope.successPopup = function() {
     var success = $ionicPopup.alert({
@@ -78,7 +82,7 @@ app.controller('PlanCtrl', ['$scope', '$stateParams', 'ExerciseList', 'StorageFa
       template: 'Type in your workout plan before saving.'
     });
   }
- 
+
   //list of all the exercises a user can select
   $scope.liftList = ExerciseList;
 
