@@ -10,9 +10,9 @@
     </div>
   </div>
 
-    <blockquote class='quote'>
-      <h3>I have never seen a thin person drinking Diet Coke.”</h3>
-      <h5>- Donald J. Trump</h5>
+    <blockquote class='quote' ng-init='getQuote()'>
+      <h3>{{quote.quote}}</h3>
+      <h5>-{{quote.author}}</h5>
     </blockquote>
 
     <div class="card">
