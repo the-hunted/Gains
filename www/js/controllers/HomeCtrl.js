@@ -64,7 +64,7 @@ app.controller('HomeCtrl', ['$scope', '$http','$ionicModal', '$ionicPopup', func
   $scope.showAlertTooMany = function() {
    var alertPopup = $ionicPopup.alert({
      title: 'Too many goals!',
-     template: 'Let\'s focus on your current goals first! Complete them before adding new goals or delete them but sliding to the left.'
+     template: 'Let\'s focus on your current goals first! Complete them before adding new goals or delete them by sliding goals to the left.'
    });
   };
 
