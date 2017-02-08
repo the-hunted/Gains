@@ -1,6 +1,20 @@
 app.controller('HomeCtrl', ['$scope', '$http','$ionicModal', '$ionicPopup', function($scope, $http, $ionicModal, $ionicPopup) {
   var apiUrl = "http://quotes.rest/qod.json?category=inspire";
 
+  // Get quote from quote API
+  $scope.getQuote = function () {
+    $http.get(apiUrl)
+    .then(function(response) {
+      var data = response.data.contents.quotes;
+      data.forEach(function(item) {
+        $scope.quote = item
+      });
+    })
+    .catch(function(error) {
+      console.log ('Error getting from Quote API', error);
+    });
+  }
+
   //Home List Features
   $scope.shouldShowDelete = false;
   $scope.shouldShowReorder = false;
@@ -75,24 +89,11 @@ app.controller('HomeCtrl', ['$scope', '$http','$ionicModal', '$ionicPopup', func
    });
   };
 
-  // Cleanup the modal when we're done with it!
+  // Cleanup the modal when we're done with it
   $scope.$on('$destroy', function() {
     $scope.modal.remove();
   });
 
-  //Get quote from quote API
-  // $scope.getQuote = function () {
-  //   $http.get(apiUrl)
-  //   .then(function(response) {
-  //     var data = response.data.contents.quotes;
-  //     data.forEach(function(item) {
-  //       $scope.quote = item
-  //     });
-  //   })
-  //   .catch(function(error) {
-  //     console.log ('Error getting from Quote API', error);
-  //   });
-  // }
 
 
   $ionicModal.fromTemplateUrl('templates/modal.html', {
