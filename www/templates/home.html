@@ -4,8 +4,9 @@
   <div class="card">
     <div class="item item-text-wrap">
       <div class='masa-header'>
-        <h2>Make America Swole</h2>
-        <h2><i class= "ion-ios-star"></i> Again <i class= "ion-ios-star"></i></h2>
+        <h2>
+          <i class= "ion-ios-star"></i> GAINS <i class= "ion-ios-star"></i>
+        </h2>
       </div>
     </div>
   </div>
@@ -18,10 +19,18 @@
     <div class="card">
       <div class="item item-divider"><strong>My Goals For Today:</strong></div>
         <ion-list show-delete="data.showDelete">
-            <ion-item ng-repeat="item in goals" item="item" class="item-remove-animate" ng-click="toggleIcon($index)">
-                  <i class={{item.icon}} ></i>
-                  {{ item.goal }}
-              <ion-option-button class="button-assertive" ng-click="onItemDelete(item)">
+            <ion-item
+              ng-repeat="item in goals"
+              item="item"
+              class="item-remove-animate"
+              ng-click="toggleIcon($index)"
+            >
+              <i class={{item.icon}} ></i>
+              {{ item.goal }}
+              <ion-option-button
+                class="button-assertive"
+                ng-click="onItemDelete(item)"
+              >
                 Delete
               </ion-option-button>
             </ion-item>
@@ -33,7 +42,12 @@
       <ion-modal-view>
         <ion-header-bar class="bar bar-header bar-positive">
           <h1 class="title">New Goal</h1>
-          <button class="button button-clear button-primary" ng-click="closeModal()"><i class="ion-ios-close"></i></button>
+          <button
+            class="button button-clear button-primary"
+            ng-click="closeModal()"
+          >
+            <i class="ion-ios-close"></i>
+          </button>
         </ion-header-bar>
         <ion-content class="padding">
           <div class="list">
@@ -41,7 +55,12 @@
               <span class="input-label">Input Goal:</span>
               <input ng-model="userInput" type="text" maxlength="20">
             </label>
-            <button class="button button-full button-positive" ng-click="createGoal(userInput); userInput = null">Create</button>
+            <button
+              class="button button-full button-positive"
+              ng-click="createGoal(userInput); userInput = null"
+            >
+              Create
+            </button>
           </div>
         </ion-content>
       </ion-modal-view>
@@ -53,4 +72,3 @@
   </ion-footer-bar>
 
 </ion-view>
-

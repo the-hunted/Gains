@@ -1,4 +1,4 @@
-angular.module('masa.services', [])
+angular.module('gains.services', [])
 .factory('StorageFac', function() {
   return { workoutDate: null };
 })
@@ -8,7 +8,8 @@ angular.module('masa.services', [])
   var _workouts;
 
   var initDB = function(){
-    //var adapter = new LokiCordovaFSAdapter({"prefix": "loki"});
+    // commented out since it does not work in the browser
+    // var adapter = new LokiCordovaFSAdapter({"prefix": "loki"});
     _db = new Loki('workoutsDB', {
       autosave: true,
       autosaveInterval: 1000,
