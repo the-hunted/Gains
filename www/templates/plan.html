@@ -6,7 +6,9 @@
         <span class="input-label">Exercise</span>
         <select ng-model="ex.name">
           <option value="">Select exercise</option>
-          <option ng-repeat="lift in liftList" value="{{lift.name}}">{{lift.name}}</option>
+          <option ng-repeat="lift in liftList" value="{{lift.name}}">
+            {{lift.name}}
+          </option>
         </select>
       </label>
       <label class="item item-input">
@@ -94,7 +96,14 @@
         </div>
       </fieldset>
     </div>
-    <button class="addfields button button-block" ng-click="addNewLift()">Add Exercise</button>
-    <button class="addfields button button-positive button-block" ng-click="logWorkout()">Save Workout</button>
+    <button class="addfields button button-block" ng-click="addNewLift()">
+      Add Exercise
+    </button>
+    <button
+      class="addfields button button-positive button-block"
+      ng-click="logWorkout()"
+    >
+      Save Workout
+    </button>
   </ion-content>
 </ion-view>

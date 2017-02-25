@@ -1,21 +1,4 @@
-# Make-America-Swole-Again
-
-
-## Welcome to M.A.S.A
-
-Before launching into our code, we request that you install the following:
-
-```
-npm install
-```
-
-and
-
-```
-bower install
-```
-
-Start up the Express server on port 8080 with npm start.
+# GAINS
 
 ## Our Motivation
 
@@ -27,53 +10,77 @@ We wanted to create an app that inspires and tracks user's progress as they hit 
 
 Y'all it's going to be YUGE! And even more important, so are you!
 
-## Our Amazing Tech
+## Getting Started
 
-* Angular
-* PostgreSQL
-* Express JS
-* Node
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-## All of Our Dependencies to Make This Awesomer
+### Prerequisites
 
-* Body-Parser
-* Express
-* Knex
-* Morgan
-* Passport
-* Pg
-* Router
+Node, Ionic, Cordova, and an ios development environment are required to use this application.
 
-## Our Quote of the Day API
+To install node/npm with homebrew on Mac OS X:
 
-http://quotes.rest/qod.json?category=inspire
+```
+brew update && brew install node
+```
+
+Set up an ios development enviroment:
+[Here](http://cordova.apache.org/docs/en/latest/guide/platforms/ios/index.html)
+
+Install Cordova:
+
+```
+npm install -g cordova
+```
+
+Install Ionic:
+
+```
+npm install -g ionic
+```
+
+### Installing
+
+Once you have node and npm, install application dependencies.
+Make sure you are in the application directory and run:
+
+```
+npm install
+bower install
+```
+
+### Run It
+
+To run in browser:
+
+```
+ionic serve
+```
+
+To run in ios simulator:
+
+```
+ionic build ios
+ionic emulate ios
+```
 
 
-## The Database
+## Built With
 
-M.A.S.A uses a PostgreSQL for its relational user and exercise data. In the server folder there are four schemas tables: users, users info, exercises, and workout history. Something to note is that users table contains information about the user's account, while the user info table holds information about the user's physicality, such as sex, weight, and age.
+* [Ionic](https://ionicframework.com) - Framework for building hybrid mobile apps with Angular
+* [Angular](https://angularjs.org/) - MVW Framework for building web/mobile apps
+* [LokiJS](http://lokijs.org/) - In-memory JavaScript Datastore with Persistence
 
-For mac users we recommend downloading the PostgreSQL app in order to more easily access and manipulate the database.
+## Authors
 
-## Our Engineers and Fitness Gurus
-
-* Nick Barnett,
-* Rachel DePriest,
-* Forrest Miller,
-* Tin Nguyen
-
-
-## Features That We Wanted To Add:
- * Autocomplete for entering in a workout
- * An interval timer
- * Calories calculator and counter
- * Tracking user's weight loss/gain
- * A feed to show everyone's progress and workouts for the day
- * Before and after pictures of the users to show their physical progress
- * Social media push notifications to share user's progress with their friends
- * Customizable goals
+* **Daniel Olita** [@danielwolita](https://twitter.com/danielwolita)
+* **Tai Hovanky** [tai.hovanky@gmail.com](tai.hovanky@gmail.com)
+* **Greg Bacus** [gbacus28@gmail.com](gbacus28@gmail.com)
 
 ## License
 
-Team NoWhey
-The Hunted
+This project is licensed under the MIT License
+
+## Acknowledgments
+
+* Hat tip to anyone who's code was used

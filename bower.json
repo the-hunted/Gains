@@ -1,12 +1,12 @@
 {
-  "name": "make-america-swole-again",
+  "name": "gains",
   "description": "",
   "authors": [
     "TeamNoWhey",
     "the-hunted"
   ],
   "license": "ISC",
-  "homepage": "https://github.com/the-hunted/make-america-swole-again",
+  "homepage": "https://github.com/the-hunted/Gains",
   "private": true,
   "ignore": [
     "**/.*",
